@@ -10,7 +10,7 @@ def _g(func):
     grad = [_d(func, "x"), _d(func, "y")]  # Частные производные
     return grad
 
-def gradient_descent(func, x_start, learning_rate=0.01, tol=1e-5, max_iter=1000):
+def gradient_descent(func, x_start, learning_rate=0.01, tol=1e-4, max_iter=1000):
     x = x_start[:]
     num_iterations = 0
 

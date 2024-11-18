@@ -1,16 +1,18 @@
 def _f(func: str, value: float, symbol: str = "x") -> float:
     return eval(func.replace(symbol, str(value)))
 
-def bisection_method(func: str, a: float, b: float, tol: float = 1e-5) -> float:
+# Метод отрезка пополам (бисекции)
+def bisection_method(func: str, a: float, b: float, tol: float = 1e-4) -> float:
     while abs(b - a) > tol:
         midpoint = (a + b) / 2
         if _f(func, midpoint - tol) < _f(func, midpoint + tol):
-            b = midpoint
+            b = midpoint # Если положительное, тогда правая граница = центральная точка
         else:
-            a = midpoint
+            a = midpoint # Если отрицательное, тогда правая граница = центральная точка
     return (a + b) / 2
 
-def golden_section_search(func: str, a: float, b: float, tol: float = 1e-5) -> float: 
+# Метод золотого сечения
+def golden_section_search(func: str, a: float, b: float, tol: float = 1e-4) -> float: 
     golden_ratio = (1 + 5 ** 0.5) / 2
 
     while abs(b - a) > tol:

@@ -7,7 +7,7 @@ def _d(func: str):
     return str(diff(func))
 
 
-def newton_raphson_method(func, x0, tol=1e-5, max_iter=100):
+def newton_raphson_method(func, x0, tol=1e-4, max_iter=100):
     x = x0
     for _ in range(max_iter):
         f_prime = _f(_d(func), x)
@@ -17,7 +17,7 @@ def newton_raphson_method(func, x0, tol=1e-5, max_iter=100):
         x = x - f_prime / f_double_prime
     return x
 
-def midpoint_method(func, a, b, tol=1e-5):
+def midpoint_method(func, a, b, tol=1e-4):
     while abs(b - a) > tol:
         midpoint = (a + b) / 2
         if _f(_d(func), midpoint) > 0:

@@ -1,5 +1,4 @@
 from sympy import diff
-import math
 
 def _f(func: str, value1: float, value2: float, symbol1: str = "x", symbol2: str = "y") -> float:
     return eval(func.replace(symbol1, str(value1)).replace(symbol2, str(value2)))
@@ -11,7 +10,7 @@ def _g(func):
     grad = [_d(func, "x"), _d(func, "y")]
     return grad
 
-def penalty_method(func, constraint_func, x_start, penalty_coef=100, learning_rate=0.01, tol=1e-5, max_iter=1000):
+def penalty_method(func, constraint_func, x_start, penalty_coef=100, learning_rate=0.01, tol=1e-4, max_iter=1000):
     x = x_start[:]
     num_iterations = 0
     
