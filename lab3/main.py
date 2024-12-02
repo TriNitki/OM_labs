@@ -1,4 +1,4 @@
-from methods import nelder_mead, hooke_jeeves
+from methods import simplex_method, hooke_jeeves
 
 
 def main():
@@ -6,7 +6,7 @@ def main():
     initial_simplex = [[0, 0], [0.1, 0], [0, 1]]
     x_start = [5.23, 4.41]
     
-    result1 = nelder_mead(func, initial_simplex)
+    result1 = simplex_method(func, initial_simplex)
     result2 = hooke_jeeves(func, x_start)
     
     print(result1, result2)

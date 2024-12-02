@@ -1,7 +1,7 @@
 def _f(func: str, value1: float, value2: float, symbol1: str = "x", symbol2: str = "y") -> float:
     return eval(func.replace(symbol1, str(value1)).replace(symbol2, str(value2)))
 
-def nelder_mead(func, initial_simplex, tol=1e-4, max_iter=1000):
+def simplex_method(func, initial_simplex, tol=1e-4, max_iter=1000):
     rho = 0.5
     sigma = 0.5
     
@@ -47,25 +47,21 @@ def hooke_jeeves(func, x0, step_size=0.5, step_reduction=0.5, tolerance=1e-4, ma
                     base_point[i] = new_point[i]
                     break
                 else:
-                    new_point[i] = base_point[i]  # reset if no improvement
+                    new_point[i] = base_point[i]
         return base_point
 
-    x_base = x0[:]  # Base point (best point so far)
-    x_new = x0[:]   # Exploratory move point
+    x_base = x0[:]  # Лучшая точка
+    x_new = x0[:]   # Точка передвижения
     iteration = 0
 
     while step_size > tolerance and iteration < max_iter:
-        # Exploratory move around x_base
         x_new = explore(x_base, step_size)
 
         if _f(func, x_new[0], x_new[1]) < _f(func, x_base[0], x_base[1]):
-            # Pattern move
             x_base = [2 * x_new[i] - x_base[i] for i in range(len(x_base))]
         else:
-            # Reduce step size if no improvement
             step_size *= step_reduction
 
         iteration += 1
-        # print(f"Iteration {iteration}: x = {x_base}, f(x) = {_f(func, x_base[0], x_base[1])}, step_size = {step_size}")
 
     return x_base
